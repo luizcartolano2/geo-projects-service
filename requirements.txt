@@ -13,3 +13,6 @@ sqlparse==0.5.3
 tomli==2.2.1
 tomlkit==0.13.2
 typing_extensions==4.13.2
+djangorestframework==3.16.0
+requests==2.32.3
+drf-yasg==1.21.10

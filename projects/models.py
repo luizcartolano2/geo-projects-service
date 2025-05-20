@@ -1,4 +1,8 @@
-""" Docstring for the models.py module.
+"""
+Project Model Module
+
+Defines the core Project model for the projects application, representing
+work initiatives with associated metadata, status tracking, and geolocation data.
 """
 import uuid
 from django.db import models
@@ -6,8 +10,17 @@ from django.db import models
 
 class Project(models.Model):
     """
-    Represents a project with metadata including name, status, date range,
-    and geolocation address. Each project has a unique UUID and validated location.
+    A model representing a work project with comprehensive tracking capabilities.
+
+    Projects are characterized by:
+    - Unique identifier and name
+    - Temporal attributes (start/end dates)
+    - Status lifecycle tracking
+    - Geolocation data with address validation
+    - Descriptive metadata
+
+    The model automatically generates a UUID and provides geocoding integration
+    through the location field which populates latitude/longitude coordinates.
     """
 
     STATUS_CHOICES = [
@@ -53,4 +66,10 @@ class Project(models.Model):
     )
 
     def __str__(self):
+        """
+        String representation of the Project instance.
+
+        Returns:
+            str: The project name for display purposes.
+        """
         return self.name

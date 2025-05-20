@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: geo_projects_service
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+    env_file:
+      - .env

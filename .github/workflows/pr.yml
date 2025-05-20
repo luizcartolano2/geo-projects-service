@@ -23,11 +23,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-#   Will keep commented for now...
-#      - name: Run Pylint
-#        run: |
-#          pylint projects
+      - name: Run Pylint
+        run: |
+          pylint_output=$(pylint projects --exit-zero)
+          echo "$pylint_output"
+          score=$(echo "$pylint_output" | grep "Your code has been rated at" | awk '{print $7}' | cut -d'/' -f1)
+          echo "Pylint score: $score"
+          # Convert score to integer for comparison by multiplying by 10 (to avoid float issues)
+          score_int=$(echo "$score * 10 / 1" | bc)
+          if [ "$score_int" -lt 80 ]; then
+            echo "Pylint score is below 8.0, failing the job."
+            exit 1
+          fi
 
       - name: Run tests
         run: |
-          pytest
+          python manage.py test
